@@ -1,5 +1,13 @@
 list 是可逆（双向）容器，同时又是顺序容器
 
+► 特点
+□ 在任意位置插入和删除元素都很快
+□ 不支持随机访问
+► 接合(splice)操作
+□ s1.splice(p, s2, q1, q2)：将s2中[q1,q2)移动到s1中p所指向元素之前
+
+
+-----
 #include <iostream>
 #include <list>
 using namespace std;
