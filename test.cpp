@@ -7,6 +7,7 @@ int main()
 {
 	map<int,int> mp;
 	mp.insert(make_pair(1,10));
+	mp.insert(make_pair(1,10));
 
 	cout << mp.size() << endl;
 
