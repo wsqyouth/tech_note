@@ -31,13 +31,14 @@ func main() {
 	//insertRowDemo()
 	//updateRowDemo()
 	//deleteRowDemo()
-	timeOutDemo()
+	//timeOutDemo()
 	//transactionDemo()
+	prepareQueryDemo()
 }
 
 // 2.0 定义初始化数据库函数
 func initDB() (err error) {
-	dsn := "xxxx:xxxx@tcp(127.0.0.1:3306)/sql_test?charset=utf8mb4&parseTime=True"
+	dsn := "coopers:2019Youth@tcp(127.0.0.1:3306)/sql_test?charset=utf8mb4&parseTime=True"
 	db, err = sql.Open("mysql", dsn) //注意使用全局对象进行赋值
 	if err != nil {
 		log.Fatalf("could not connect to database: %v", err)
@@ -217,6 +218,34 @@ func transactionDemo() {
 	}
 
 	fmt.Println("exec trans end")
+}
+
+// 5.0 预处理操作示例
+func prepareQueryDemo() {
+	sqlStr := "select id,name,age from user where id > ?"
+	stmt, err := db.Prepare(sqlStr)
+	if err != nil {
+		fmt.Println("prepare err.")
+		return
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(1)
+	if err != nil {
+		fmt.Printf("query failed, err: %v\n", err)
+		return
+	}
+	defer rows.Close()
+	// 循环读取结果集中的数据
+	for rows.Next() {
+		var u user
+		err := rows.Scan(&u.id, &u.name, &u.age)
+		if err != nil {
+			fmt.Printf("scan failed, err: %v\n", err)
+			return
+		}
+		fmt.Printf("user:%v\n", u)
+	}
 }
 
 // 第一步:测试db是否ping通
