@@ -23,6 +23,7 @@ func New() *MemoryProductRepository {
 	}
 }
 
+// GetAll 获取所有
 func (mpr *MemoryProductRepository) GetAll() ([]aggregate.Product, error) {
 	//map -> slice
 	var products []aggregate.Product
@@ -32,35 +33,35 @@ func (mpr *MemoryProductRepository) GetAll() ([]aggregate.Product, error) {
 	return products, nil
 }
 
+// GetByID 根据id查找
 func (mpr *MemoryProductRepository) GetByID(id uuid.UUID) (aggregate.Product, error) {
-	if _, ok := mpr.products[id]; ok {
+	if product, ok := mpr.products[id]; ok {
+		return product, nil
 	}
 	return aggregate.Product{}, product.ErrProductNotFound
 }
 
 // Add 新增
-func (mpr *MemoryProductRepository) Add(product aggregate.Product) error {
+func (mpr *MemoryProductRepository) Add(newProduct aggregate.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
-	if _, ok := mpr.products[product.GetID()]; ok {
-		// return fmt.Errorf("product already exist: %w", product.ErrProductAlreadyExist)
-		return product.ErrProductAlreadyExist
+	if _, ok := mpr.products[newProduct.GetID()]; ok {
+		return fmt.Errorf("product already exist: %w", product.ErrProductAlreadyExist)
 	}
-	mpr.products[product.GetID()] = product
+	mpr.products[newProduct.GetID()] = newProduct
 
 	return nil
 }
 
 // Update 更新
-func (mpr *MemoryProductRepository) Update(product aggregate.Product) error {
+func (mpr *MemoryProductRepository) Update(newProduct aggregate.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
-	if _, ok := mpr.products[product.GetID()]; !ok {
-		// return fmt.Errorf("product does not exist: %w", product.ErrProductNotFound)
-		return product.ErrProductNotFound
+	if _, ok := mpr.products[newProduct.GetID()]; !ok {
+		return fmt.Errorf("product does not exist: %w", product.ErrProductNotFound)
 	}
 
-	mpr.products[product.GetID()] = product
+	mpr.products[newProduct.GetID()] = newProduct
 	return nil
 }
 

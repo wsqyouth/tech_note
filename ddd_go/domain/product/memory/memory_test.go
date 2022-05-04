@@ -10,7 +10,7 @@ import (
 
 func TestMemoryProductRepository_Add(t *testing.T) {
 	repo := New()
-	product, err := aggregate.NewProduct("Beer", "Good for you're health", 1.99)
+	product, err := aggregate.NewProduct("青岛啤酒", "真的爽", 1.99)
 	if err != nil {
 		t.Error(err)
 	}
@@ -22,7 +22,7 @@ func TestMemoryProductRepository_Add(t *testing.T) {
 }
 func TestMemoryProductRepository_Get(t *testing.T) {
 	repo := New()
-	existingProd, err := aggregate.NewProduct("Beer", "Good for you're health", 1.99)
+	existingProd, err := aggregate.NewProduct("青岛啤酒", "真的爽", 1.99)
 	if err != nil {
 		t.Error(err)
 	}
@@ -63,7 +63,7 @@ func TestMemoryProductRepository_Get(t *testing.T) {
 }
 func TestMemoryProductRepository_Delete(t *testing.T) {
 	repo := New()
-	existingProd, err := aggregate.NewProduct("Beer", "Good for you're health", 1.99)
+	existingProd, err := aggregate.NewProduct("青岛啤酒", "真的爽", 1.99)
 	if err != nil {
 		t.Error(err)
 	}
