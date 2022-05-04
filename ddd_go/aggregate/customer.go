@@ -24,7 +24,7 @@ var (
 	ErrInvalidPerson = errors.New("a customer has to have an valid person")
 )
 
-// NewCustomer 创造new custome的工厂
+// NewCustomer 创造new customer的工厂
 func NewCustomer(name string) (Customer, error) {
 	// validate name not empty
 	if name == "" {
@@ -44,7 +44,7 @@ func NewCustomer(name string) (Customer, error) {
 	}, nil
 }
 
-/* 围绕customer persion的贫血模型---start*/
+/* 围绕customer person的贫血模型---start*/
 // GetID 获取customer的根实体id
 func (c *Customer) GetID() uuid.UUID {
 	return c.person.ID
@@ -71,4 +71,4 @@ func (c *Customer) SetName(name string) {
 	c.person.Name = name
 }
 
-/* 围绕customer persion的贫血模型---end*/
+/* 围绕customer person的贫血模型---end*/
