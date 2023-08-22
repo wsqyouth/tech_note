@@ -11,6 +11,7 @@ MySQL 的架构共分为两层：Server 层和存储引擎层。
  show processlist; 查看 MySQL 服务被多少个客户端连接
  show variables like 'wait_timeout'; MySQL 定义了空闲连接的最大空闲时长，由 wait_timeout 参数控制的，默认值是 8 小时（28880秒）.
  show variables like 'max_connections'; 最大连接数由 max_connections 参数
+```
 
 长连接与短连接：
 使用长连接的好处就是可以减少建立连接和断开连接的过程，所以一般是推荐使用长连接。
@@ -22,7 +23,7 @@ MySQL 的架构共分为两层：Server 层和存储引擎层。
 ### 第二步：查询缓存
 如果 SQL 是查询语句（select 语句），MySQL 就会先去查询缓存（ Query Cache ）里查找缓存数据，命中则返回。
 挺鸡肋: 对于更新比较频繁的表，查询缓存的命中率很低的，因为只要一个表有更新操作，那么这个表的查询缓存就会被清空。
-MySQL 8.0 版本直接将查询缓存删掉了。
+因此MySQL8.0版本直接将查询缓存删掉了。
 
 ### 第三步：解析 SQL
 第一，词法分析。MySQL 会根据你输入的字符串识别出关键字出来，构建出 SQL 语法树，这样方便后面模块获取 SQL 类型、表名、字段名、 where 条件等等。
