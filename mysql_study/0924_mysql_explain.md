@@ -241,6 +241,7 @@ where条件始终是false，不会命中任何记录，比如你的条件是“w
 ```
 SELECT * FROM single_table WHERE binary key1 = 'c90ab6cb630a35f';
 ```
+索引列上有计算和函数，索引都会失效。
 3、模糊搜索时，使用了like “%xxx”的形式，因为MySQL的索引是左匹配的。
 4、在使用联合索引时，必须带上最左边的字段（也是左匹配原则），比如a,b,c字段建立联合索引，则(a=x and b=x)和（a=x and c=x)都是走索引的，但是(b=x) (b=x and c=x)是不走索引的。
 5、虽然是索引字段，但是使用了"not in"
