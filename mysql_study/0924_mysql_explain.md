@@ -252,4 +252,6 @@ EXPLAIN SELECT * FROM single_table WHERE key1 not in ("22");
 ```
 EXPLAIN SELECT key1 FROM single_table WHERE key1 = 'a' or common_field = 'a';
 ```
-索引失效的场景比较多，这里只归纳了部分，大家可以去搜一下更多的场景
+索引失效的场景比较多，这里只归纳了部分: 
+
+![Alt text](index_dismiss.png)
