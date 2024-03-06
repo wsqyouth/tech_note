@@ -1,0 +1,7 @@
+{
+  "name": "node_echo",
+  "main": "./lib/echo.js",
+  "dependencies": {
+    "argv": "^0.0.2"
+  }
+}

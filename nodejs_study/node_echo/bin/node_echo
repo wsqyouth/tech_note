@@ -1,0 +1,5 @@
+// bin/node-echo
+var argv = require('argv');
+var echo = require('../lib/echo');
+console.log(echo(process.argv.slice(2).join(' ')));
+
